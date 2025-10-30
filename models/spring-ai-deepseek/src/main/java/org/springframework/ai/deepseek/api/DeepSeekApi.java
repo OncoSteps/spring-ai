@@ -101,10 +101,7 @@ public class DeepSeekApi {
 			.defaultStatusHandler(responseErrorHandler)
 			.build();
 
-		this.webClient = webClientBuilder
-			.baseUrl(baseUrl)
-			.defaultHeaders(finalHeaders)
-			.build();
+		this.webClient = webClientBuilder.baseUrl(baseUrl).defaultHeaders(finalHeaders).build();
 
 	}
 

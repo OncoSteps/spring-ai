@@ -82,6 +82,16 @@ public class OpenAiImageApi {
 		this.imagesPath = imagesPath;
 	}
 
+	/**
+	 * Create a new OpenAI Image API with the provided rest client.
+	 * @param restClient the rest client instance to use.
+	 * @param imagesPath the images path to use.
+	 */
+	public OpenAiImageApi(RestClient restClient, String imagesPath) {
+		this.restClient = restClient;
+		this.imagesPath = imagesPath;
+	}
+
 	public ResponseEntity<OpenAiImageResponse> createImage(OpenAiImageRequest openAiImageRequest) {
 		Assert.notNull(openAiImageRequest, "Image request cannot be null.");
 		Assert.hasLength(openAiImageRequest.prompt(), "Prompt cannot be empty.");

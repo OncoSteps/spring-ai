@@ -82,6 +82,16 @@ public final class ElevenLabsApi {
 		this.webClient = webClientBuilder.baseUrl(baseUrl).defaultHeaders(jsonContentHeaders).build();
 	}
 
+	/**
+	 * Create a new ElevenLabs API client.
+	 * @param restClient Spring RestClient instance.
+	 * @param webClient Spring WebClient instance.
+	 */
+	public ElevenLabsApi(RestClient restClient, WebClient webClient) {
+		this.restClient = restClient;
+		this.webClient = webClient;
+	}
+
 	public static Builder builder() {
 		return new Builder();
 	}

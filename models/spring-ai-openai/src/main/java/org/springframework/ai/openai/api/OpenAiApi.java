@@ -114,7 +114,7 @@ public class OpenAiApi {
 
 	private final WebClient webClient;
 
-	private OpenAiStreamFunctionCallingHelper chunkMerger = new OpenAiStreamFunctionCallingHelper();
+	private final OpenAiStreamFunctionCallingHelper chunkMerger = new OpenAiStreamFunctionCallingHelper();
 
 	/**
 	 * Create a new chat completion api.
@@ -157,6 +157,30 @@ public class OpenAiApi {
 			.baseUrl(baseUrl)
 			.defaultHeaders(finalHeaders)
 			.build(); // @formatter:on
+	}
+
+	/**
+	 * Create a new chat completion api.
+	 * @param baseUrl api base URL.
+	 * @param apiKey OpenAI apiKey.
+	 * @param headers the http headers to use.
+	 * @param completionsPath the path to the chat completions endpoint.
+	 * @param embeddingsPath the path to the embeddings endpoint.
+	 * @param restClient RestClient instance.
+	 * @param webClient WebClient instance.
+	 * @param responseErrorHandler Response error handler.
+	 */
+	public OpenAiApi(String baseUrl, ApiKey apiKey, MultiValueMap<String, String> headers, String completionsPath,
+					 String embeddingsPath, ResponseErrorHandler responseErrorHandler, RestClient restClient,
+					 WebClient webClient) {
+		this.baseUrl = baseUrl;
+		this.apiKey = apiKey;
+		this.headers = headers;
+		this.completionsPath = completionsPath;
+		this.embeddingsPath = embeddingsPath;
+		this.responseErrorHandler = responseErrorHandler;
+		this.restClient = restClient;
+		this.webClient = webClient;
 	}
 
 	/**

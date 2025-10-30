@@ -190,6 +190,34 @@ public class ZhiPuAiApi {
 			.build(); // @formatter:on
 	}
 
+	/**
+	 * Create a new chat completion api.
+	 * @param baseUrl api base URL.
+	 * @param apiKey ZhiPuAI apiKey.
+	 * @param headers the http headers to use.
+	 * @param completionsPath the path to the chat completions endpoint.
+	 * @param embeddingsPath the path to the embeddings endpoint.
+	 * @param restClient RestClient instance.
+	 * @param webClient WebClient instance.
+	 * @param responseErrorHandler Response error handler.
+	 */
+	public ZhiPuAiApi(String baseUrl, ApiKey apiKey, MultiValueMap<String, String> headers, String completionsPath,
+					  String embeddingsPath, ResponseErrorHandler responseErrorHandler, RestClient restClient,
+					  WebClient webClient) {
+		Assert.hasText(completionsPath, "Completions Path must not be null");
+		Assert.hasText(embeddingsPath, "Embeddings Path must not be null");
+		Assert.notNull(headers, "Headers must not be null");
+
+		this.baseUrl = baseUrl;
+		this.apiKey = apiKey;
+		this.headers = headers;
+		this.completionsPath = completionsPath;
+		this.embeddingsPath = embeddingsPath;
+		this.responseErrorHandler = responseErrorHandler;
+		this.restClient = restClient;
+		this.webClient = webClient;
+	}
+
 	public static String getTextContent(List<ChatCompletionMessage.MediaContent> content) {
 		return content.stream()
 			.filter(c -> "text".equals(c.type()))

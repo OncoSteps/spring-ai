@@ -98,6 +98,16 @@ public class OpenAiAudioApi {
 			.build(); // @formatter:on
 	}
 
+	/**
+	 * Create a new audio api.
+	 * @param restClient RestClient instance.
+	 * @param webClient WebClient instance.
+	 */
+	public OpenAiAudioApi(RestClient restClient, WebClient webClient) {
+		this.restClient = restClient;
+		this.webClient = webClient;
+	}
+
 	public static Builder builder() {
 		return new Builder();
 	}

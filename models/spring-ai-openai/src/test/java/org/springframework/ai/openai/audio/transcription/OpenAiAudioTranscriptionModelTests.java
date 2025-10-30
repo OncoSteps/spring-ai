@@ -28,7 +28,7 @@ import org.springframework.ai.openai.api.OpenAiAudioApi;
 import org.springframework.ai.openai.api.OpenAiAudioApi.TranscriptResponseFormat;
 import org.springframework.ai.retry.RetryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.boot.restclient.test.autoconfigure.RestClientTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;

@@ -151,6 +151,20 @@ public final class AnthropicApi {
 	}
 
 	/**
+	 * Create a new client api.
+	 * @param completionsPath path to append to the base URL.
+	 * @param restClient RestClient instance.
+	 * @param webClient WebClient instance.
+	 * @param apiKey Anthropic api Key.
+	 */
+	public AnthropicApi(String completionsPath, RestClient restClient, WebClient webClient, ApiKey apiKey) {
+		this.completionsPath = completionsPath;
+		this.restClient = restClient;
+		this.webClient = webClient;
+		this.apiKey = apiKey;
+	}
+
+	/**
 	 * Creates a model response for the given chat conversation.
 	 * @param chatRequest The chat completion request.
 	 * @return Entity response with {@link ChatCompletionResponse} as a body and HTTP

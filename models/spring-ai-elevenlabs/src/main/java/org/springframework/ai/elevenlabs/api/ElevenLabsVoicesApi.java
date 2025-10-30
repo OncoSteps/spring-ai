@@ -73,6 +73,14 @@ public class ElevenLabsVoicesApi {
 
 	}
 
+	/**
+	 * Create a new ElevenLabs Voices API client.
+	 * @param restClient Spring RestClient instance.
+	 */
+	public ElevenLabsVoicesApi(RestClient restClient) {
+		this.restClient = restClient;
+	}
+
 	public static Builder builder() {
 		return new Builder();
 	}

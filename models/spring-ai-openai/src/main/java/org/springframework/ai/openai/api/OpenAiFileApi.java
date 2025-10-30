@@ -65,6 +65,10 @@ public class OpenAiFileApi {
 			.build();
 	}
 
+	public OpenAiFileApi(RestClient restClient) {
+		this.restClient = restClient;
+	}
+
 	public static Builder builder() {
 		return new Builder();
 	}

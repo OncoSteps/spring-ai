@@ -19,8 +19,6 @@ package org.springframework.ai.openai.api;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.ai.model.ApiKey;
 import org.springframework.ai.model.NoopApiKey;
@@ -49,11 +47,7 @@ public class OpenAiModerationApi {
 
 	public static final String DEFAULT_MODERATION_MODEL = "text-moderation-latest";
 
-	private static final String DEFAULT_BASE_URL = "https://api.openai.com";
-
 	private final RestClient restClient;
-
-	private final ObjectMapper objectMapper;
 
 	/**
 	 * Create a new OpenAI Moderation API with the provided base URL.
@@ -63,8 +57,6 @@ public class OpenAiModerationApi {
 	 */
 	public OpenAiModerationApi(String baseUrl, ApiKey apiKey, MultiValueMap<String, String> headers,
 			RestClient.Builder restClientBuilder, ResponseErrorHandler responseErrorHandler) {
-
-		this.objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		// @formatter:off
 		this.restClient = restClientBuilder.clone()
@@ -80,6 +72,14 @@ public class OpenAiModerationApi {
 				}
 			})
 			.build(); // @formatter:on
+	}
+
+	/**
+	 * Create a new OpenAI Moderation API with the provided rest client.
+	 * @param restClient the rest client instance to use.
+	 */
+	public OpenAiModerationApi(RestClient restClient) {
+		this.restClient = restClient;
 	}
 
 	public ResponseEntity<OpenAiModerationResponse> createModeration(OpenAiModerationRequest openAiModerationRequest) {

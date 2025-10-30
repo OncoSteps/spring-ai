@@ -302,8 +302,8 @@
 		<sap.hanadb.version>2.20.11</sap.hanadb.version>
 		<coherence.version>24.09</coherence.version>
 		<milvus.version>2.5.8</milvus.version>
-		<gemfire.testcontainers.version>2.3.0</gemfire.testcontainers.version>
-		<testcontainers.version>1.20.4</testcontainers.version>
+		<gemfire.testcontainers.version>2.3.3</gemfire.testcontainers.version>
+		<testcontainers.version>2.0.1</testcontainers.version>
 
 		<pinecone.version>4.0.1</pinecone.version>
 		<pinecone.protobuf-java-util.version>4.29.3</pinecone.protobuf-java-util.version>
@@ -932,6 +932,20 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
 				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.testcontainers</groupId>
+				<artifactId>testcontainers-bom</artifactId>
+				<version>${testcontainers.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.rest-assured</groupId>
+				<artifactId>rest-assured-bom</artifactId>
+				<version>${rest-assured-bom.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

@@ -68,7 +68,7 @@ public class OpenAiImageApi {
 			.baseUrl(baseUrl)
 			.defaultHeaders(h -> {
 				h.setContentType(MediaType.APPLICATION_JSON);
-				h.addAll(headers);
+				h.addAll(HttpHeaders.readOnlyHttpHeaders(headers));
 			})
 			.defaultStatusHandler(responseErrorHandler)
 			.defaultRequest(requestHeadersSpec -> {

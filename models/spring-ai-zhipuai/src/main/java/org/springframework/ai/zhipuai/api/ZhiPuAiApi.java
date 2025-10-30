@@ -174,7 +174,7 @@ public class ZhiPuAiApi {
 
 		Consumer<HttpHeaders> authHeaders = h -> {
 			h.setContentType(MediaType.APPLICATION_JSON);
-			h.addAll(headers);
+			h.addAll(HttpHeaders.readOnlyHttpHeaders(headers));
 		};
 
 		this.restClient = restClientBuilder.clone()
@@ -223,7 +223,7 @@ public class ZhiPuAiApi {
 		return this.restClient.post()
 			.uri(this.completionsPath)
 			.headers(headers -> {
-				headers.addAll(additionalHttpHeader);
+				headers.addAll(HttpHeaders.readOnlyHttpHeaders(additionalHttpHeader));
 				addDefaultHeadersIfMissing(headers);
 			})
 			.body(chatRequest)
@@ -260,7 +260,7 @@ public class ZhiPuAiApi {
 		return this.webClient.post()
 			.uri(this.completionsPath)
 			.headers(headers -> {
-				headers.addAll(additionalHttpHeader);
+				headers.addAll(HttpHeaders.readOnlyHttpHeaders(additionalHttpHeader));
 				addDefaultHeadersIfMissing(headers);
 			}) // @formatter:on
 			.body(Mono.just(chatRequest), ChatCompletionRequest.class)
@@ -330,7 +330,7 @@ public class ZhiPuAiApi {
 	}
 
 	private void addDefaultHeadersIfMissing(HttpHeaders headers) {
-		if (!headers.containsKey(HttpHeaders.AUTHORIZATION) && !(this.apiKey instanceof NoopApiKey)) {
+		if (null == headers.getFirst(HttpHeaders.AUTHORIZATION) && !(this.apiKey instanceof NoopApiKey)) {
 			headers.setBearerAuth(this.apiKey.getValue());
 		}
 	}

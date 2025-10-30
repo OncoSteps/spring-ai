@@ -51,7 +51,7 @@ public class OpenAiFileApi {
 
 	public OpenAiFileApi(String baseUrl, ApiKey apiKey, MultiValueMap<String, String> headers,
 			RestClient.Builder restClientBuilder, ResponseErrorHandler responseErrorHandler) {
-		Consumer<HttpHeaders> authHeaders = h -> h.addAll(headers);
+		Consumer<HttpHeaders> authHeaders = h -> h.addAll(HttpHeaders.readOnlyHttpHeaders(headers));
 
 		this.restClient = restClientBuilder.clone()
 			.baseUrl(baseUrl)

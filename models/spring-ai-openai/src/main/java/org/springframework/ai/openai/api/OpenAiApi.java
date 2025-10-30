@@ -145,7 +145,7 @@ public class OpenAiApi {
 		Consumer<HttpHeaders> finalHeaders = h -> {
 			h.setContentType(MediaType.APPLICATION_JSON);
 			h.set(HTTP_USER_AGENT_HEADER, SPRING_AI_USER_AGENT);
-			h.addAll(headers);
+			h.addAll(HttpHeaders.readOnlyHttpHeaders(headers));
 		};
 		this.restClient = restClientBuilder.clone()
 			.baseUrl(baseUrl)
@@ -204,7 +204,7 @@ public class OpenAiApi {
 		return this.restClient.post()
 			.uri(this.completionsPath)
 			.headers(headers -> {
-				headers.addAll(additionalHttpHeader);
+				headers.addAll(HttpHeaders.readOnlyHttpHeaders(additionalHttpHeader));
 				addDefaultHeadersIfMissing(headers);
 			})
 			.body(chatRequest)
@@ -243,7 +243,7 @@ public class OpenAiApi {
 		return this.webClient.post()
 			.uri(this.completionsPath)
 			.headers(headers -> {
-				headers.addAll(additionalHttpHeader);
+				headers.addAll(HttpHeaders.readOnlyHttpHeaders(additionalHttpHeader));
 				addDefaultHeadersIfMissing(headers);
 			}) // @formatter:on
 			.body(Mono.just(chatRequest), ChatCompletionRequest.class)
@@ -328,7 +328,7 @@ public class OpenAiApi {
 	}
 
 	private void addDefaultHeadersIfMissing(HttpHeaders headers) {
-		if (!headers.containsKey(HttpHeaders.AUTHORIZATION) && !(this.apiKey instanceof NoopApiKey)) {
+		if (null == headers.getFirst(HttpHeaders.AUTHORIZATION) && !(this.apiKey instanceof NoopApiKey)) {
 			headers.setBearerAuth(this.apiKey.getValue());
 		}
 	}

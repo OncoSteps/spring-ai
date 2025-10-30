@@ -70,7 +70,7 @@ public final class ElevenLabsApi {
 			if (!(apiKey instanceof NoopApiKey)) {
 				h.set("xi-api-key", apiKey.getValue());
 			}
-			h.addAll(headers);
+			h.addAll(HttpHeaders.readOnlyHttpHeaders(headers));
 			h.setContentType(MediaType.APPLICATION_JSON);
 		};
 

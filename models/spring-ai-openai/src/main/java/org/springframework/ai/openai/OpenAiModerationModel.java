@@ -34,8 +34,8 @@ import org.springframework.ai.moderation.ModerationResponse;
 import org.springframework.ai.moderation.ModerationResult;
 import org.springframework.ai.openai.api.OpenAiModerationApi;
 import org.springframework.ai.retry.RetryUtils;
-import org.springframework.http.ResponseEntity;
 import org.springframework.core.retry.RetryTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 
 /**

@@ -282,7 +282,7 @@ public class OpenAiRetryTests {
 
 		@Override
 		public void beforeRetry(RetryPolicy retryPolicy, Retryable<?> retryable) {
-			retryCount++;
+			this.retryCount++;
 		}
 
 	}

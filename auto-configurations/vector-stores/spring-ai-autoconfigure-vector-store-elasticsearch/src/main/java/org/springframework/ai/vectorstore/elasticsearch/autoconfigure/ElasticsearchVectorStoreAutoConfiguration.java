@@ -16,8 +16,6 @@
 
 package org.springframework.ai.vectorstore.elasticsearch.autoconfigure;
 
-import java.util.Objects;
-
 import co.elastic.clients.transport.rest5_client.low_level.Rest5Client;
 import io.micrometer.observation.ObservationRegistry;
 
@@ -73,12 +71,8 @@ public class ElasticsearchVectorStoreAutoConfiguration {
 
 		PropertyMapper mapper = PropertyMapper.get();
 		mapper.from(properties::getIndexName).whenHasText().to(elasticsearchVectorStoreOptions::setIndexName);
-		mapper.from(properties::getDimensions)
-			.when(Objects::nonNull)
-			.to(elasticsearchVectorStoreOptions::setDimensions);
-		mapper.from(properties::getSimilarity)
-			.when(Objects::nonNull)
-			.to(elasticsearchVectorStoreOptions::setSimilarity);
+		mapper.from(properties::getDimensions).to(elasticsearchVectorStoreOptions::setDimensions);
+		mapper.from(properties::getSimilarity).to(elasticsearchVectorStoreOptions::setSimilarity);
 		mapper.from(properties::getEmbeddingFieldName)
 			.whenHasText()
 			.to(elasticsearchVectorStoreOptions::setEmbeddingFieldName);

@@ -51,9 +51,9 @@ public class CouchbaseSearchVectorStoreAutoConfiguration {
 		mapper.from(properties::getBucketName).whenHasText().to(builder::bucketName);
 		mapper.from(properties::getScopeName).whenHasText().to(builder::scopeName);
 		mapper.from(properties::getCollectionName).whenHasText().to(builder::collectionName);
-		mapper.from(properties::getDimensions).when(Objects::nonNull).to(builder::dimensions);
-		mapper.from(properties::getSimilarity).when(Objects::nonNull).to(builder::similarityFunction);
-		mapper.from(properties::getOptimization).when(Objects::nonNull).to(builder::indexOptimization);
+		mapper.from(properties::getDimensions).to(builder::dimensions);
+		mapper.from(properties::getSimilarity).to(builder::similarityFunction);
+		mapper.from(properties::getOptimization).to(builder::indexOptimization);
 
 		return builder.initializeSchema(properties.isInitializeSchema()).build();
 	}

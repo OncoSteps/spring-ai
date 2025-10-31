@@ -63,8 +63,8 @@ class CouchbaseSearchVectorStoreAutoConfigurationIT {
 
 	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
 		.withConfiguration(AutoConfigurations.of(CouchbaseAutoConfiguration.class,
-				CouchbaseSearchVectorStoreAutoConfiguration.class,
-				SpringAiRetryAutoConfiguration.class, OpenAiEmbeddingAutoConfiguration.class))
+				CouchbaseSearchVectorStoreAutoConfiguration.class, SpringAiRetryAutoConfiguration.class,
+				OpenAiEmbeddingAutoConfiguration.class))
 		.withPropertyValues("spring.couchbase.connection-string=" + couchbaseContainer.getConnectionString(),
 				"spring.couchbase.username=" + couchbaseContainer.getUsername(),
 				"spring.couchbase.password=" + couchbaseContainer.getPassword(),
@@ -112,8 +112,8 @@ class CouchbaseSearchVectorStoreAutoConfigurationIT {
 	public void propertiesTest() {
 		new ApplicationContextRunner()
 			.withConfiguration(AutoConfigurations.of(CouchbaseAutoConfiguration.class,
-					CouchbaseSearchVectorStoreAutoConfiguration.class,
-					SpringAiRetryAutoConfiguration.class, OpenAiEmbeddingAutoConfiguration.class))
+					CouchbaseSearchVectorStoreAutoConfiguration.class, SpringAiRetryAutoConfiguration.class,
+					OpenAiEmbeddingAutoConfiguration.class))
 			.withPropertyValues("spring.couchbase.connection-string=" + couchbaseContainer.getConnectionString(),
 					"spring.couchbase.username=" + couchbaseContainer.getUsername(),
 					"spring.couchbase.password=" + couchbaseContainer.getPassword(),

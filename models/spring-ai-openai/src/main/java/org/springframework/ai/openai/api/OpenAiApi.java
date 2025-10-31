@@ -48,8 +48,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -102,7 +100,7 @@ public class OpenAiApi {
 
 	private final ApiKey apiKey;
 
-	private final MultiValueMap<String, String> headers;
+	private final HttpHeaders headers;
 
 	private final String completionsPath;
 
@@ -127,8 +125,8 @@ public class OpenAiApi {
 	 * @param webClientBuilder WebClient builder.
 	 * @param responseErrorHandler Response error handler.
 	 */
-	public OpenAiApi(String baseUrl, ApiKey apiKey, MultiValueMap<String, String> headers, String completionsPath,
-			String embeddingsPath, RestClient.Builder restClientBuilder, WebClient.Builder webClientBuilder,
+	public OpenAiApi(String baseUrl, ApiKey apiKey, HttpHeaders headers, String completionsPath, String embeddingsPath,
+			RestClient.Builder restClientBuilder, WebClient.Builder webClientBuilder,
 			ResponseErrorHandler responseErrorHandler) {
 		this.baseUrl = baseUrl;
 		this.apiKey = apiKey;
@@ -145,7 +143,7 @@ public class OpenAiApi {
 		Consumer<HttpHeaders> finalHeaders = h -> {
 			h.setContentType(MediaType.APPLICATION_JSON);
 			h.set(HTTP_USER_AGENT_HEADER, SPRING_AI_USER_AGENT);
-			h.addAll(HttpHeaders.readOnlyHttpHeaders(headers));
+			h.addAll(headers);
 		};
 		this.restClient = restClientBuilder.clone()
 			.baseUrl(baseUrl)
@@ -170,9 +168,8 @@ public class OpenAiApi {
 	 * @param webClient WebClient instance.
 	 * @param responseErrorHandler Response error handler.
 	 */
-	public OpenAiApi(String baseUrl, ApiKey apiKey, MultiValueMap<String, String> headers, String completionsPath,
-			String embeddingsPath, ResponseErrorHandler responseErrorHandler, RestClient restClient,
-			WebClient webClient) {
+	public OpenAiApi(String baseUrl, ApiKey apiKey, HttpHeaders headers, String completionsPath, String embeddingsPath,
+			ResponseErrorHandler responseErrorHandler, RestClient restClient, WebClient webClient) {
 		this.baseUrl = baseUrl;
 		this.apiKey = apiKey;
 		this.headers = headers;
@@ -206,7 +203,7 @@ public class OpenAiApi {
 	 * and headers.
 	 */
 	public ResponseEntity<ChatCompletion> chatCompletionEntity(ChatCompletionRequest chatRequest) {
-		return chatCompletionEntity(chatRequest, new LinkedMultiValueMap<>());
+		return chatCompletionEntity(chatRequest, new HttpHeaders());
 	}
 
 	/**
@@ -218,7 +215,7 @@ public class OpenAiApi {
 	 * and headers.
 	 */
 	public ResponseEntity<ChatCompletion> chatCompletionEntity(ChatCompletionRequest chatRequest,
-			MultiValueMap<String, String> additionalHttpHeader) {
+			HttpHeaders additionalHttpHeader) {
 
 		Assert.notNull(chatRequest, REQUEST_BODY_NULL_MESSAGE);
 		Assert.isTrue(!chatRequest.stream(), STREAM_FALSE_MESSAGE);
@@ -228,7 +225,7 @@ public class OpenAiApi {
 		return this.restClient.post()
 			.uri(this.completionsPath)
 			.headers(headers -> {
-				headers.addAll(HttpHeaders.readOnlyHttpHeaders(additionalHttpHeader));
+				headers.addAll(additionalHttpHeader);
 				addDefaultHeadersIfMissing(headers);
 			})
 			.body(chatRequest)
@@ -244,7 +241,7 @@ public class OpenAiApi {
 	 * @return Returns a {@link Flux} stream from chat completion chunks.
 	 */
 	public Flux<ChatCompletionChunk> chatCompletionStream(ChatCompletionRequest chatRequest) {
-		return chatCompletionStream(chatRequest, new LinkedMultiValueMap<>());
+		return chatCompletionStream(chatRequest, new HttpHeaders());
 	}
 
 	/**
@@ -256,7 +253,7 @@ public class OpenAiApi {
 	 * @return Returns a {@link Flux} stream from chat completion chunks.
 	 */
 	public Flux<ChatCompletionChunk> chatCompletionStream(ChatCompletionRequest chatRequest,
-			MultiValueMap<String, String> additionalHttpHeader) {
+			HttpHeaders additionalHttpHeader) {
 
 		Assert.notNull(chatRequest, REQUEST_BODY_NULL_MESSAGE);
 		Assert.isTrue(chatRequest.stream(), "Request must set the stream property to true.");
@@ -267,7 +264,7 @@ public class OpenAiApi {
 		return this.webClient.post()
 			.uri(this.completionsPath)
 			.headers(headers -> {
-				headers.addAll(HttpHeaders.readOnlyHttpHeaders(additionalHttpHeader));
+				headers.addAll(additionalHttpHeader);
 				addDefaultHeadersIfMissing(headers);
 			}) // @formatter:on
 			.body(Mono.just(chatRequest), ChatCompletionRequest.class)
@@ -352,7 +349,7 @@ public class OpenAiApi {
 	}
 
 	private void addDefaultHeadersIfMissing(HttpHeaders headers) {
-		if (null == headers.getFirst(HttpHeaders.AUTHORIZATION) && !(this.apiKey instanceof NoopApiKey)) {
+		if (headers.get(HttpHeaders.AUTHORIZATION) == null && !(this.apiKey instanceof NoopApiKey)) {
 			headers.setBearerAuth(this.apiKey.getValue());
 		}
 	}
@@ -366,7 +363,7 @@ public class OpenAiApi {
 		return this.apiKey;
 	}
 
-	MultiValueMap<String, String> getHeaders() {
+	HttpHeaders getHeaders() {
 		return this.headers;
 	}
 
@@ -2024,7 +2021,8 @@ public class OpenAiApi {
 		public Builder(OpenAiApi api) {
 			this.baseUrl = api.getBaseUrl();
 			this.apiKey = api.getApiKey();
-			this.headers = new LinkedMultiValueMap<>(api.getHeaders());
+			this.headers = new HttpHeaders();
+			this.headers.addAll(api.getHeaders());
 			this.completionsPath = api.getCompletionsPath();
 			this.embeddingsPath = api.getEmbeddingsPath();
 			this.restClientBuilder = api.restClient != null ? api.restClient.mutate() : RestClient.builder();
@@ -2036,7 +2034,7 @@ public class OpenAiApi {
 
 		private ApiKey apiKey;
 
-		private MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+		private HttpHeaders headers = new HttpHeaders();
 
 		private String completionsPath = "/v1/chat/completions";
 
@@ -2065,7 +2063,7 @@ public class OpenAiApi {
 			return this;
 		}
 
-		public Builder headers(MultiValueMap<String, String> headers) {
+		public Builder headers(HttpHeaders headers) {
 			Assert.notNull(headers, "headers cannot be null");
 			this.headers = headers;
 			return this;

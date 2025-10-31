@@ -329,6 +329,7 @@
 
 		<!-- testing dependencies -->
 		<okhttp3.version>4.12.0</okhttp3.version>
+		<rest-assured-bom.version>5.5.6</rest-assured-bom.version>
 		<json-unit-assertj.version>4.1.0</json-unit-assertj.version>
 
 		<!-- MCP-->
@@ -363,7 +364,6 @@
 
 		<disable.checks>false</disable.checks>
 
-		<rest-assured-bom.version>5.5.6</rest-assured-bom.version>
 	</properties>
 
 	<build>

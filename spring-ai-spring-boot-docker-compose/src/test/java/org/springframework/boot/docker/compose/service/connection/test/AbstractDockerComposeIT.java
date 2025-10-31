@@ -33,7 +33,7 @@ import org.springframework.boot.SpringApplicationShutdownHandlers;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.service.connection.ConnectionDetails;
 import org.springframework.boot.testsupport.DisabledIfProcessUnavailable;
-import org.springframework.boot.tomcat.autoconfigure.servlet.TomcatServletWebServerAutoConfiguration;
+import org.springframework.boot.web.server.autoconfigure.servlet.ServletWebServerConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -97,7 +97,7 @@ public abstract class AbstractDockerComposeIT {
 	}
 
 	@Configuration(proxyBeanMethods = false)
-	@ImportAutoConfiguration(TomcatServletWebServerAutoConfiguration.class)
+	@ImportAutoConfiguration(ServletWebServerConfiguration.class)
 	static class Config {
 
 	}

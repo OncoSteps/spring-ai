@@ -49,7 +49,6 @@ import io.micrometer.observation.ObservationRegistry;
 import io.micrometer.observation.contextpropagation.ObservationThreadLocalAccessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.retry.RetryException;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
@@ -92,8 +91,9 @@ import org.springframework.ai.vertexai.gemini.common.VertexAiGeminiSafetySetting
 import org.springframework.ai.vertexai.gemini.schema.VertexAiSchemaConverter;
 import org.springframework.ai.vertexai.gemini.schema.VertexToolCallingManager;
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.lang.NonNull;
+import org.springframework.core.retry.RetryException;
 import org.springframework.core.retry.RetryTemplate;
+import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;

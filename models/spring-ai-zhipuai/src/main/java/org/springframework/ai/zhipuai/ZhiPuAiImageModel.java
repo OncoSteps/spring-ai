@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.retry.RetryException;
 
 import org.springframework.ai.image.Image;
 import org.springframework.ai.image.ImageGeneration;
@@ -31,8 +30,9 @@ import org.springframework.ai.image.ImageResponse;
 import org.springframework.ai.model.ModelOptionsUtils;
 import org.springframework.ai.retry.RetryUtils;
 import org.springframework.ai.zhipuai.api.ZhiPuAiImageApi;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.retry.RetryException;
 import org.springframework.core.retry.RetryTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 
 /**

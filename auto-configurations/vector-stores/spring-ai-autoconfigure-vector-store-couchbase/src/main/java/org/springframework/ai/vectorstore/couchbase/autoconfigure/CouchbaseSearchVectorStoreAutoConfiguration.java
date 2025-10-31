@@ -16,8 +16,6 @@
 
 package org.springframework.ai.vectorstore.couchbase.autoconfigure;
 
-import java.util.Objects;
-
 import com.couchbase.client.java.Cluster;
 
 import org.springframework.ai.embedding.EmbeddingModel;

@@ -52,11 +52,11 @@ import org.springframework.ai.zhipuai.api.ZhiPuAiApi.EmbeddingRequest;
 import org.springframework.ai.zhipuai.api.ZhiPuAiImageApi.Data;
 import org.springframework.ai.zhipuai.api.ZhiPuAiImageApi.ZhiPuAiImageRequest;
 import org.springframework.ai.zhipuai.api.ZhiPuAiImageApi.ZhiPuAiImageResponse;
-import org.springframework.http.ResponseEntity;
 import org.springframework.core.retry.RetryListener;
 import org.springframework.core.retry.RetryPolicy;
-import org.springframework.core.retry.Retryable;
 import org.springframework.core.retry.RetryTemplate;
+import org.springframework.core.retry.Retryable;
+import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

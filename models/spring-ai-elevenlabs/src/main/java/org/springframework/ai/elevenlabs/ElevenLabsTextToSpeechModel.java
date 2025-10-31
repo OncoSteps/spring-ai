@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.retry.RetryException;
 import reactor.core.publisher.Flux;
 
 import org.springframework.ai.audio.tts.Speech;
@@ -30,6 +29,7 @@ import org.springframework.ai.audio.tts.TextToSpeechPrompt;
 import org.springframework.ai.audio.tts.TextToSpeechResponse;
 import org.springframework.ai.elevenlabs.api.ElevenLabsApi;
 import org.springframework.ai.retry.RetryUtils;
+import org.springframework.core.retry.RetryException;
 import org.springframework.core.retry.RetryTemplate;
 import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;

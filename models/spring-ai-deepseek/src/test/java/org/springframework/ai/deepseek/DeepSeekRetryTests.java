@@ -34,11 +34,11 @@ import org.springframework.ai.deepseek.api.DeepSeekApi.ChatCompletionMessage.Rol
 import org.springframework.ai.deepseek.api.DeepSeekApi.ChatCompletionRequest;
 import org.springframework.ai.retry.RetryUtils;
 import org.springframework.ai.retry.TransientAiException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.core.retry.RetryListener;
 import org.springframework.core.retry.RetryPolicy;
-import org.springframework.core.retry.Retryable;
 import org.springframework.core.retry.RetryTemplate;
+import org.springframework.core.retry.Retryable;
+import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

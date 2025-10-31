@@ -45,11 +45,11 @@ import org.springframework.ai.minimax.api.MiniMaxApi.EmbeddingRequest;
 import org.springframework.ai.model.tool.ToolCallingManager;
 import org.springframework.ai.retry.RetryUtils;
 import org.springframework.ai.retry.TransientAiException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.core.retry.RetryListener;
 import org.springframework.core.retry.RetryPolicy;
 import org.springframework.core.retry.RetryTemplate;
 import org.springframework.core.retry.Retryable;
+import org.springframework.http.ResponseEntity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

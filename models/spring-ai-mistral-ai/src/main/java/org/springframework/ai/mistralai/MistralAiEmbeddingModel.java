@@ -22,7 +22,6 @@ import java.util.Map;
 import io.micrometer.observation.ObservationRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.retry.RetryException;
 
 import org.springframework.ai.chat.metadata.DefaultUsage;
 import org.springframework.ai.document.Document;
@@ -40,6 +39,7 @@ import org.springframework.ai.embedding.observation.EmbeddingModelObservationDoc
 import org.springframework.ai.mistralai.api.MistralAiApi;
 import org.springframework.ai.model.ModelOptionsUtils;
 import org.springframework.ai.retry.RetryUtils;
+import org.springframework.core.retry.RetryException;
 import org.springframework.core.retry.RetryTemplate;
 import org.springframework.util.Assert;
 

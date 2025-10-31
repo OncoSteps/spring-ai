@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.retry.RetryException;
 
 import org.springframework.ai.mistralai.api.MistralAiModerationApi;
 import org.springframework.ai.model.ModelOptionsUtils;
@@ -35,8 +34,9 @@ import org.springframework.ai.moderation.ModerationPrompt;
 import org.springframework.ai.moderation.ModerationResponse;
 import org.springframework.ai.moderation.ModerationResult;
 import org.springframework.ai.retry.RetryUtils;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.retry.RetryException;
 import org.springframework.core.retry.RetryTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 
 import static org.springframework.ai.mistralai.api.MistralAiModerationApi.MistralAiModerationRequest;

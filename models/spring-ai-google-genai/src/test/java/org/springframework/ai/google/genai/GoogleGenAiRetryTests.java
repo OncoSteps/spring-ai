@@ -29,8 +29,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ai.retry.RetryUtils;
 import org.springframework.core.retry.RetryListener;
 import org.springframework.core.retry.RetryPolicy;
-import org.springframework.core.retry.Retryable;
 import org.springframework.core.retry.RetryTemplate;
+import org.springframework.core.retry.Retryable;
 
 /**
  * @author Mark Pollack

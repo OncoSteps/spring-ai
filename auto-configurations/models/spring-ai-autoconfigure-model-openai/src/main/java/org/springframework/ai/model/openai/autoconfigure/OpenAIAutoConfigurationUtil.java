@@ -16,10 +16,6 @@
 
 package org.springframework.ai.model.openai.autoconfigure;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;

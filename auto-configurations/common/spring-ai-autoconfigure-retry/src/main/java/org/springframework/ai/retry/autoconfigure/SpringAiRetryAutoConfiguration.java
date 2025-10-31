@@ -75,7 +75,7 @@ public class SpringAiRetryAutoConfiguration {
 
 			@Override
 			public void onRetryFailure(RetryPolicy policy, Retryable<?> retryable, Throwable throwable) {
-				int currentRetries = retryCount.incrementAndGet();
+				int currentRetries = this.retryCount.incrementAndGet();
 				logger.warn("Retry error. Retry count:{}", currentRetries, throwable);
 			}
 		});

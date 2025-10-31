@@ -202,8 +202,8 @@ public class ZhiPuAiApi {
 	 * @param responseErrorHandler Response error handler.
 	 */
 	public ZhiPuAiApi(String baseUrl, ApiKey apiKey, MultiValueMap<String, String> headers, String completionsPath,
-					  String embeddingsPath, ResponseErrorHandler responseErrorHandler, RestClient restClient,
-					  WebClient webClient) {
+			String embeddingsPath, ResponseErrorHandler responseErrorHandler, RestClient restClient,
+			WebClient webClient) {
 		Assert.hasText(completionsPath, "Completions Path must not be null");
 		Assert.hasText(embeddingsPath, "Embeddings Path must not be null");
 		Assert.notNull(headers, "Headers must not be null");

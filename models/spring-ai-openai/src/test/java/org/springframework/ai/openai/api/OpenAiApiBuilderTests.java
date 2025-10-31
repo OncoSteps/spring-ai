@@ -38,8 +38,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -67,7 +65,7 @@ public class OpenAiApiBuilderTests {
 
 	@Test
 	void testFullBuilder() {
-		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+		HttpHeaders headers = new HttpHeaders();
 		headers.add("Custom-Header", "test-value");
 		RestClient.Builder restClientBuilder = RestClient.builder();
 		WebClient.Builder webClientBuilder = WebClient.builder();
@@ -193,7 +191,7 @@ public class OpenAiApiBuilderTests {
 
 	@Test
 	void testBuilderMethodChaining() {
-		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+		HttpHeaders headers = new HttpHeaders();
 		headers.add("Test-Header", "test-value");
 
 		OpenAiApi api = OpenAiApi.builder()
@@ -212,7 +210,7 @@ public class OpenAiApiBuilderTests {
 
 	@Test
 	void testCustomHeadersPreservation() {
-		MultiValueMap<String, String> customHeaders = new LinkedMultiValueMap<>();
+		HttpHeaders customHeaders = new HttpHeaders();
 		customHeaders.add("X-Custom-Header", "custom-value");
 		customHeaders.add("X-Organization", "org-123");
 		customHeaders.add("User-Agent", "Custom-Client/1.0");
@@ -224,7 +222,7 @@ public class OpenAiApiBuilderTests {
 
 	@Test
 	void testComplexMultiValueHeaders() {
-		MultiValueMap<String, String> multiHeaders = new LinkedMultiValueMap<>();
+		HttpHeaders multiHeaders = new HttpHeaders();
 		multiHeaders.add("Accept", "application/json");
 		multiHeaders.add("Accept", "text/plain");
 		multiHeaders.add("Cache-Control", "no-cache");
@@ -446,7 +444,7 @@ public class OpenAiApiBuilderTests {
 			OpenAiApi.ChatCompletionRequest request = new OpenAiApi.ChatCompletionRequest(
 					List.of(chatCompletionMessage), "gpt-3.5-turbo", 0.8, false);
 
-			MultiValueMap<String, String> additionalHeaders = new LinkedMultiValueMap<>();
+			HttpHeaders additionalHeaders = new HttpHeaders();
 			additionalHeaders.add(HttpHeaders.AUTHORIZATION, "Bearer additional-key");
 			ResponseEntity<OpenAiApi.ChatCompletion> response = api.chatCompletionEntity(request, additionalHeaders);
 			assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -543,7 +541,7 @@ public class OpenAiApiBuilderTests {
 					OpenAiApi.ChatCompletionMessage.Role.USER);
 			OpenAiApi.ChatCompletionRequest request = new OpenAiApi.ChatCompletionRequest(
 					List.of(chatCompletionMessage), "gpt-3.5-turbo", 0.8, true);
-			MultiValueMap<String, String> additionalHeaders = new LinkedMultiValueMap<>();
+			HttpHeaders additionalHeaders = new HttpHeaders();
 			additionalHeaders.add(HttpHeaders.AUTHORIZATION, "Bearer additional-key");
 			List<OpenAiApi.ChatCompletionChunk> response = api.chatCompletionStream(request, additionalHeaders)
 				.collectList()

@@ -276,7 +276,7 @@ public class OpenAiApiBuilderTests {
 
 	@Test
 	void testBuilderCreatesIndependentInstances() {
-		MultiValueMap<String, String> sharedHeaders = new LinkedMultiValueMap<>();
+		HttpHeaders sharedHeaders = new HttpHeaders();
 		sharedHeaders.add("X-Shared", "value");
 
 		OpenAiApi.Builder builder = OpenAiApi.builder()
@@ -292,8 +292,8 @@ public class OpenAiApiBuilderTests {
 		OpenAiApi api2 = builder.build();
 
 		// Both APIs should have the modified headers since they share the same reference
-		assertThat(api1.getHeaders()).containsKey("X-Modified");
-		assertThat(api2.getHeaders()).containsKey("X-Modified");
+		assertThat(api1.getHeaders().containsHeader("X-Modified")).isTrue();
+		assertThat(api2.getHeaders().containsHeader("X-Modified")).isTrue();
 	}
 
 	@Test
@@ -310,23 +310,23 @@ public class OpenAiApiBuilderTests {
 
 	@Test
 	void testMutateCreatesIndependentHeaders() {
-		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+		HttpHeaders headers = new HttpHeaders();
 		headers.add("X-Original", "value1");
 
 		OpenAiApi original = OpenAiApi.builder().apiKey(TEST_API_KEY).headers(headers).build();
 
-		MultiValueMap<String, String> newHeaders = new LinkedMultiValueMap<>();
+		HttpHeaders newHeaders = new HttpHeaders();
 		newHeaders.add("X-New", "value2");
 
 		OpenAiApi mutated = original.mutate().headers(newHeaders).build();
 
 		// Original headers should be unchanged
-		assertThat(original.getHeaders()).containsKey("X-Original");
-		assertThat(original.getHeaders()).doesNotContainKey("X-New");
+		assertThat(original.getHeaders().containsHeader("X-Original")).isTrue();
+		assertThat(original.getHeaders().containsHeader("X-New")).isFalse();
 
 		// Mutated should have new headers
-		assertThat(mutated.getHeaders()).doesNotContainKey("X-Original");
-		assertThat(mutated.getHeaders()).containsKey("X-New");
+		assertThat(mutated.getHeaders().containsHeader("X-Original")).isFalse();
+		assertThat(mutated.getHeaders().containsHeader("X-New")).isTrue();
 	}
 
 	@Test

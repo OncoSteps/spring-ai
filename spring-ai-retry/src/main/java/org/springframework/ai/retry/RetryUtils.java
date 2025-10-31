@@ -121,7 +121,7 @@ public abstract class RetryUtils {
 			@Override
 			public void onRetryFailure(final RetryPolicy policy, final Retryable<?> retryable,
 					final Throwable throwable) {
-				int currentRetries = retryCount.incrementAndGet();
+				int currentRetries = this.retryCount.incrementAndGet();
 				LOGGER.warn("Retry error. Retry count:{}", currentRetries, throwable);
 			}
 		});
@@ -148,7 +148,7 @@ public abstract class RetryUtils {
 			@Override
 			public void onRetryFailure(final RetryPolicy policy, final Retryable<?> retryable,
 					final Throwable throwable) {
-				int currentRetries = retryCount.incrementAndGet();
+				int currentRetries = this.retryCount.incrementAndGet();
 				LOGGER.warn("Retry error. Retry count:{}", currentRetries, throwable);
 			}
 		});

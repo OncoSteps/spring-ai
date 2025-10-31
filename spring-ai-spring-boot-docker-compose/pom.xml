@@ -201,13 +201,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mongodb</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-
 		<!-- test dependencies -->
 
         <dependency>
@@ -222,7 +215,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <scope>test</scope>
         </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

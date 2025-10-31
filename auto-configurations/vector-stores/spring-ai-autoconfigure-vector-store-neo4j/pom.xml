@@ -63,10 +63,6 @@
 			<artifactId>spring-boot-autoconfigure-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-neo4j</artifactId>
-		</dependency>
 		<!-- test dependencies -->
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
@@ -77,11 +73,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-neo4j</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

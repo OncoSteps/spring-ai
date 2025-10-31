@@ -64,11 +64,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-cassandra</artifactId>
-		</dependency>
-
 		<!-- test dependencies -->
 		<dependency>
 			<groupId>org.springframework.ai</groupId>

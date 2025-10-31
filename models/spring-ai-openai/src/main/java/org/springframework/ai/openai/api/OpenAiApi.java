@@ -168,9 +168,8 @@ public class OpenAiApi {
 	 * @param webClient WebClient instance.
 	 * @param responseErrorHandler Response error handler.
 	 */
-	public OpenAiApi(String baseUrl, ApiKey apiKey, HttpHeaders headers, String completionsPath,
-			String embeddingsPath, ResponseErrorHandler responseErrorHandler, RestClient restClient,
-			WebClient webClient) {
+	public OpenAiApi(String baseUrl, ApiKey apiKey, HttpHeaders headers, String completionsPath, String embeddingsPath,
+			ResponseErrorHandler responseErrorHandler, RestClient restClient, WebClient webClient) {
 		this.baseUrl = baseUrl;
 		this.apiKey = apiKey;
 		this.headers = headers;

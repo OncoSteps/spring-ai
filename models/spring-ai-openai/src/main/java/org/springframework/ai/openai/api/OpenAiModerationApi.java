@@ -45,8 +45,7 @@ import org.springframework.web.client.RestClient;
  */
 public class OpenAiModerationApi {
 
-	public static final String DEFAULT_MODERATION_MODEL = "text-moderation-latest";
-
+	public static final String DEFAULT_MODERATION_MODEL = "omni-moderation-latest";
 	private final RestClient restClient;
 
 	/**

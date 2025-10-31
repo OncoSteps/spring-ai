@@ -94,6 +94,7 @@ public class SpringAiRetryAutoConfiguration {
 				handleError(response);
 			}
 
+			@SuppressWarnings("removal")
 			public void handleError(@NonNull ClientHttpResponse response) throws IOException {
 				if (!response.getStatusCode().isError()) {
 					return;
